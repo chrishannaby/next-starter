@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 export async function getStaticProps({ params }) {
-  const hero = await fetch("https://source.unsplash.com/random");
+  const hero = await fetch("https://source.unsplash.com/random/624x288");
   const heroSrc = await hero.url;
   const randomContent = await fetch(
     "https://loripsum.net/api/10/decorate/ul/bq/code/headers"
@@ -35,7 +35,7 @@ export default function Post({ title, content, heroSrc }) {
             {title}
           </div>
         </div>
-        <img src={heroSrc} alt="hero image" className="object-cover" />=
+        <img src={heroSrc} alt="hero image" className="object-cover" />
       </div>
       <div
         className="my-12 prose prose-indigo prose-lg text-gray-500 mx-auto"
