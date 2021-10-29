@@ -18,7 +18,9 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: "blocking" };
+  const paths = [{ params: { id: "static" } }];
+
+  return { paths, fallback: "blocking" };
 }
 
 export default function Post({ title, content, heroSrc }) {
