@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 
 export async function getStaticProps({ params }) {
   const hero = await fetch("https://source.unsplash.com/random");
@@ -36,14 +35,7 @@ export default function Post({ title, content, heroSrc }) {
             {title}
           </div>
         </div>
-        <Image
-          src={heroSrc}
-          alt="hero image"
-          layout="fill"
-          className="object-cover"
-          priority={true}
-        />
-        =
+        <img src={heroSrc} alt="hero image" className="object-cover" />=
       </div>
       <div
         className="my-12 prose prose-indigo prose-lg text-gray-500 mx-auto"
