@@ -79,6 +79,18 @@ export default function Home({ staticPages, nonExistingStaticSlug }) {
           </Link>{" "}
           or any other random slug .
         </p>
+        <h2>Server Side Rendered</h2>
+        <p>
+          The following page will be server side rendered and fetch new data on
+          every request.
+        </p>
+        <ul>
+          <li>
+            <Link href="/ssr">
+              <a>/ssr</a>
+            </Link>
+          </li>
+        </ul>
       </section>
     </>
   );
