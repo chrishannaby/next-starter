@@ -18,7 +18,7 @@ export async function getStaticProps() {
       pageBuildAt,
       siteBuiltAt,
     },
-    revalidate: 60, // setting revalidate to any value will cause Netlify to fall back to SSR for this page
+    revalidate: 3600, // setting revalidate to any value will cause Netlify to fall back to SSR for this page
   };
 }
 
