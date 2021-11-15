@@ -5,5 +5,5 @@ This Next.js app demonstrates how various Next.js features work on Netlify. It g
 You can customise the number of static pages it builds by modifying the following environmental variable
 
 ```
-NUMBER_OF_STATIC_PAGES=10
+NUMBER_OF_STATIC_PAGES=100
 ```
