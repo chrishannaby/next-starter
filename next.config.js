@@ -7,4 +7,17 @@ module.exports = withNextPluginPreval({
   images: {
     domains: ["images.unsplash.com"],
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "x-hello",
+            value: "there",
+          },
+        ],
+      },
+    ];
+  },
 });
