@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import staticPageSlugs from "../../../lib/staticPages.preval";
 import siteBuiltAt from "../../../lib/buildTime.preval";
 import { formatDate } from "../../../lib/formatDate";
