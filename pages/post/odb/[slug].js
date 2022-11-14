@@ -1,10 +1,15 @@
-import Head from "next/head";
 import Image from "next/image";
-import staticPageSlugs from "../../lib/staticPages.preval";
-import siteBuiltAt from "../../lib/buildTime.preval";
-import { formatDate } from "../../lib/formatDate";
+import odbPageSlugs from "../../../lib/odbPages.preval";
+import siteBuiltAt from "../../../lib/buildTime.preval";
+import { formatDate } from "../../../lib/formatDate";
 
 export async function getStaticProps({ params }) {
+  if (!odbPageSlugs.all.includes(params.slug)) {
+    return {
+      notFound: true,
+    };
+  }
+  const isCritical = odbPageSlugs.critical.includes(params.slug);
   const pageBuildAt = formatDate(new Date());
   const hero = await fetch("https://source.unsplash.com/random/700x300");
   const heroSrc = await hero.url;
@@ -19,20 +24,21 @@ export async function getStaticProps({ params }) {
       heroSrc,
       pageBuildAt,
       siteBuiltAt,
+      isCritical,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const paths = staticPageSlugs.map((slug) => {
+  // Just generate the critical pages at build time
+  const paths = odbPageSlugs.critical.map((slug) => {
     return {
       params: {
         slug,
       },
     };
   });
-
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export default function Post({
@@ -41,12 +47,10 @@ export default function Post({
   heroSrc,
   pageBuildAt,
   siteBuiltAt,
+  isCritical,
 }) {
   return (
     <>
-      <Head>
-        <title>Next.js | {title}</title>
-      </Head>
       <div className="text-lg max-w-prose mx-auto h-72 relative">
         <div className="absolute bg-gray-600 w-full h-full opacity-60 top-0 left-0 z-10"></div>
         <div className="absolute z-20 flex flex-col items-center w-full justify-center h-full">
@@ -63,7 +67,17 @@ export default function Post({
         />
       </div>
       <div className="mt-12 prose">
-        <h2>Static page built at build time</h2>
+        {isCritical ? (
+          <h2>Critical page generated at build time</h2>
+        ) : (
+          <h2>
+            Deferred page generated on-demand via an{" "}
+            <a href="https://docs.netlify.com/configure-builds/on-demand-builders/">
+              On-demand builder
+            </a>
+          </h2>
+        )}
+
         <p>
           Site build started at: <strong>{siteBuiltAt}</strong>
         </p>
