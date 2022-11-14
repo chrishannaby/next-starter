@@ -1,8 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import staticPageSlugs from "../../lib/staticPages.preval";
-import siteBuiltAt from "../../lib/buildTime.preval";
-import { formatDate } from "../../lib/formatDate";
+import Image from "next/legacy/image";
+import staticPageSlugs from "../../../lib/staticPages.preval";
+import siteBuiltAt from "../../../lib/buildTime.preval";
+import { formatDate } from "../../../lib/formatDate";
 
 export async function getStaticProps({ params }) {
   const pageBuildAt = formatDate(new Date());
@@ -42,11 +41,9 @@ export default function Post({
   pageBuildAt,
   siteBuiltAt,
 }) {
+  console.log(title);
   return (
     <>
-      <Head>
-        <title>Next.js | {title}</title>
-      </Head>
       <div className="text-lg max-w-prose mx-auto h-72 relative">
         <div className="absolute bg-gray-600 w-full h-full opacity-60 top-0 left-0 z-10"></div>
         <div className="absolute z-20 flex flex-col items-center w-full justify-center h-full">
