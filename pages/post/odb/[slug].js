@@ -26,6 +26,7 @@ export async function getStaticProps({ params }) {
       siteBuiltAt,
       isCritical,
     },
+    revalidate: 60,
   };
 }
 
